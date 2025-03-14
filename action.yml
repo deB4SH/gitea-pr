@@ -150,7 +150,7 @@ runs:
       run: >-
         cd "${{ inputs.path || env.GITHUB_WORKSPACE }}" &&
         echo "$PWD" &&
-        tea pr create --head "${{ inputs.branch }}" --base "${{ inputs.base }}" --title "${COMMIT_MSG}" --description "${COMMIT_DESC}" --assignees "${{ inputs.assignee }}" --label "${{ inputs.pr-label }}"
+        tea pr create --head "${{ inputs.branch }}" --base "${{ inputs.base }}" --title "${COMMIT_MSG}" --description "${COMMIT_DESC}" --assignees "${{ inputs.assignee }}" --labels "${{ inputs.pr-label }}"
 
     - name: Skip pull request
       if: steps.no-pr.outcome == 'failure'
