@@ -123,6 +123,7 @@ runs:
         GIT_SERVER_URL: ${{ inputs.url }}
         GIT_SERVER_TOKEN: ${{ inputs.token }}
       run: >-
+        echo "Logging into Gitea"
         cd "${{ inputs.path || env.GITHUB_WORKSPACE }}" &&
         echo "$PWD" &&
         tea login add
@@ -134,6 +135,7 @@ runs:
       continue-on-error: true
       shell: bash
       run: >-
+        echo "Checking for existing Pull Request"
         cd "${{ inputs.path || env.GITHUB_WORKSPACE }}" &&
         echo "$PWD" &&
         tea pr -f head -o simple |
@@ -148,6 +150,7 @@ runs:
         COMMIT_DESC: ${{ steps.commit.outputs.COMMIT_DESC }}
       shell: bash
       run: >-
+        echo "Creating Pull Request"
         cd "${{ inputs.path || env.GITHUB_WORKSPACE }}" &&
         echo "$PWD" &&
         tea pr create --head "${{ inputs.branch }}" --base "${{ inputs.base }}" --title "${COMMIT_MSG}" --description "${COMMIT_DESC}" --assignees "${{ inputs.assignee }}" --labels "${{ inputs.pr-label }}"
